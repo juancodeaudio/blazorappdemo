@@ -19,7 +19,7 @@ public class ProductService(HttpClient httpClient): IProductService
         return JsonSerializer.Deserialize<List<Product>>(content, options);
     }
 
-    public async Task AddProductsAsync(Product product)
+    public async Task AddProductAsync(Product product)
     {
         var response = await client.PostAsync("v1/products", JsonContent.Create(product));
         var content = await response.Content.ReadAsStringAsync();
@@ -43,6 +43,6 @@ public class ProductService(HttpClient httpClient): IProductService
 public interface IProductService
 {
     Task<List<Product>?> GetProductsAsync();
-    Task AddProductsAsync(Product product);
+    Task AddProductAsync(Product product);
     Task DeleteProductAsync(int productId);
 }
